@@ -15,8 +15,12 @@ const app = express();
 // Your OS may require that your conString is composed of additional information including user and password.
 // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
 
+const user = 'sharon';
+const password = '';
+const host = 'localhost';
+
 // Mac:
-const conString = 'postgres://localhost:5432';
+const conString = `postgres://${user}:${password}@${host}:5432/kilovolt`;
 
 // DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 // This is how it knows the URL and, for Windows and Linux users, our username and password for our database when client.connect() is called below. Thus, we need to pass our conString into our pg.Client() call.
@@ -58,7 +62,7 @@ app.get('/articles', (request, response) => {
 
 app.post('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // step 3. insertRecord is on article.js and inteacting with the line of code below. CREATE. 
   let SQL = `
     INSERT INTO articles(title, author, author_url, category, published_on, body)
     VALUES ($1, $2, $3, $4, $5, $6);
@@ -84,11 +88,27 @@ app.post('/articles', (request, response) => {
 
 app.put('/articles/:id', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // This is part of number 3- putting it to the database. updateRecord is the method which interacts with this piece of server.js. This is UPDATE in CRUD. 
 
   // TODO: Build query string here
-  let SQL = '';
-  let values = [];
+  let SQL = `UPDATE articles SET 
+    title=$1,
+    author=$2,
+    author_url=$3,
+    category=$4,
+    published_on=$5,
+    body=$6
+    WHERE article_id=$7`
+    
+  let values = [ 
+    request.body.title,
+    request.body.author,
+    request.body.author_url,
+    request.body.category,
+    request.body.published_on,
+    request.body.body,
+    request.params.id]
+    ;
 
   client.query( SQL, values )
     .then(() => {
