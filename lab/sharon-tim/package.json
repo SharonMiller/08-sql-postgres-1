@@ -1,0 +1,24 @@
+{
+  "name": "sharon-tim",
+  "version": "1.0.0",
+  "description": "lab 08 sql postgres",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pg": "^7.4.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SharonMiller/08-sql-postgres-1.git"
+  },
+  "author": "Sharon and Tim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SharonMiller/08-sql-postgres-1/issues"
+  },
+  "homepage": "https://github.com/SharonMiller/08-sql-postgres-1#readme"
+}
