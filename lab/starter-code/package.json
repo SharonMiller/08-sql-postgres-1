@@ -1,14 +1,24 @@
 {
-  "name": "mvc-blog",
+  "name": "sharon-tim",
   "version": "1.0.0",
-  "description": "As we now complete our MVC conversation, we can refactor our app to use good MVC separation of concerns.",
+  "description": "lab 08 sql postgres",
   "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pg": "^7.4.3"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Code Fellows",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SharonMiller/08-sql-postgres-1.git"
+  },
+  "author": "Sharon and Tim",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.2"
-  }
+  "bugs": {
+    "url": "https://github.com/SharonMiller/08-sql-postgres-1/issues"
+  },
+  "homepage": "https://github.com/SharonMiller/08-sql-postgres-1#readme"
 }

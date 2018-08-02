@@ -1,7 +1,7 @@
 'use strict';
 
-// TODO: Install and require the NPM PostgreSQL package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
-
+// DONE: Install and require the NPM PostgreSQL package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
+const pg = require('pg');
 const fs = require('fs');
 const express = require('express');
 
@@ -16,12 +16,12 @@ const app = express();
 // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
 
 // Mac:
-// const conString = 'postgres://localhost:5432';
+const conString = 'postgres://localhost:5432';
 
-// TODO: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
+// DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 // This is how it knows the URL and, for Windows and Linux users, our username and password for our database when client.connect() is called below. Thus, we need to pass our conString into our pg.Client() call.
 
-const client = new pg.Client();
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -36,7 +36,7 @@ app.use(express.static('./public'));
 // REVIEW: Routes for requesting HTML resources
 app.get('/new-article', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js, if any, is interacting with this particular piece of `server.js`? What part of CRUD, if any, is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // The number from the fullstack diagram corresponding to the line of code is 5. There is not a medthod on article.js interacting with this piece of server.js. the part of CRUD is Read/Retrieve. 
   response.sendFile('new.html', {root: './public'});
 });
 
@@ -44,10 +44,10 @@ app.get('/new-article', (request, response) => {
 // REVIEW: Routes for making API calls to use CRUD Operations on our database
 app.get('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // The query corresponds with number 3 in the diagram. It is the read in CRUD. The fetchAll method interacts with this piece of server.js.
 
-  // TODO: Build query string here
-  client.query('')
+  // DONE: Build query string here
+  client.query('SELECT * FROM articles')
     .then(function(result) {
       response.send(result.rows);
     })
@@ -131,7 +131,7 @@ app.delete('/articles', (request, response) => {
 });
 
 // COMMENT: What is this function invocation doing?
-// PUT YOUR RESPONSE HERE
+//first it makes a query to create a table if it does not already exist in the database. Then it loads the articles or sends an error if it is not working. 
 loadDB();
 
 app.listen(PORT, () => {
